@@ -179,6 +179,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # others
+/config.json
 /.vscode
 /babel.config.json
 /database/db.sqlite
