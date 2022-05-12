@@ -3,7 +3,7 @@ const { Client, Intents } = require("discord.js"); // Import des classes nécess
 const { token } = require("./config.json"); // Recherche des configurations dans le fichier de config
 
 const client = new Client({
-    intents: [Intents.FLAGS.GUILD_MESSAGES],
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 }); // Nouvel objet client, avec les intents de guild
 
 //* Récupère les events
