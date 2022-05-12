@@ -180,7 +180,7 @@ $RECYCLE.BIN/
 
 # others
 /config.json
-/.vscode
+.vscode
 /babel.config.json
 /database/db.sqlite
 
