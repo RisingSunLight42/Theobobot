@@ -22,10 +22,12 @@ module.exports = {
         }
 
         //* PARTIE DI
-        const regex_list_di = /\b(?:di|dy)\b/giy;
-        if (regex_list_di.test(mot)) {
+        const regex_list_di = /\b(?:^di\w+|^dy\w+)\b/gi;
+        if (regex_list_di.test(mot_sans_doublons)) {
             await message.channel.send(
-                `${mot.substr(["s", "t"].includes(mot[2]) ? 3 : 2)}`
+                `${await mot_sans_doublons.substr(
+                    /(s|t)/gi.test(mot_sans_doublons[2]) ? 3 : 2
+                )}`
             );
         }
 
