@@ -31,6 +31,14 @@ module.exports = {
             );
         }
 
+        //* PARTIE CRI
+        const regex_list_cri = /\b(?:^cri\w+|^cry\w+)\b/gi;
+        if (regex_list_cri.test(mot_sans_doublons)) {
+            await message.channel.send(
+                `${await (await mot_sans_doublons.substr(3)).toUpperCase()}`
+            );
+        }
+
         //* PARTIE QUOI
         const regex_quoi = /quoi/iy;
         regex_quoi.lastIndex = mot_sans_doublons.length - 4;
