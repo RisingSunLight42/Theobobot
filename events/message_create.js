@@ -40,10 +40,17 @@ module.exports = {
         }
 
         //* PARTIE QUOI
-        const regex_quoi = /quoi/iy;
-        regex_quoi.lastIndex = mot_sans_doublons.length - 4;
-
+        const regex_quoi = /quoi$/i;
+        const messages_feur = [
+            "feur !",
+            "feur ?",
+            "*Louison se retourne tout sourire* FEUR !",
+            "*Romain arrive et lâche nonchalamment* feur",
+            "feuuuUUUUuuUuUr",
+        ];
         if (regex_quoi.test(mot_sans_doublons))
-            return await message.channel.send("feur !");
+            return await message.channel.send(
+                messages_feur[Math.floor(Math.random() * messages_feur.length)]
+            );
     },
 };
