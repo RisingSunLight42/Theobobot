@@ -15,16 +15,21 @@ module.exports = {
         const mot = contenu[contenu.length - 1];
         if (mot.length < 4) return; // Si la longueur du mot est plus petite que 4, ça ne peut pas être quoi et répéter serait inutile, on renvoie
 
-        //* PARTIE DI
-        const regex_list_di = /\b(?:di|dy)\b/giy;
-
-        //* PARTIE QUOI
         //* Nettoyage du mot pour pas avoir de doublons de lettres pour bien réussir la détection du quoi
         let mot_sans_doublons = mot[0];
         for (i = 1; i < mot.length; i++) {
             mot_sans_doublons += mot[i] != mot[i - 1] ? mot[i] : "";
         }
 
+        //* PARTIE DI
+        const regex_list_di = /\b(?:di|dy)\b/giy;
+        if (regex_list_di.test(mot)) {
+            await message.channel.send(
+                `${mot.substr(["s", "t"].includes(mot[2]) ? 3 : 2)}`
+            );
+        }
+
+        //* PARTIE QUOI
         const regex_quoi = /quoi/iy;
         regex_quoi.lastIndex = mot_sans_doublons.length - 4;
 
