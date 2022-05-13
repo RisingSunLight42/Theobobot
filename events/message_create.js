@@ -5,7 +5,7 @@ module.exports = {
         let contenu = message.content;
 
         //* Définit un regex qui permet de match tous les emojis classiques
-        const regex_nettoyage = /[^\w\s]/g; // Remplace tout ce qui n'est pas des nombres, caractères de ponctuations, espaces ou underscore
+        const regex_nettoyage = /[^àùçèé\w\s]/g; // Récupère tout ce qui n'est pas des lettres (les accents sont mis en durs car sinon ils sont capturés) et des espaces
 
         //* Nettoyage de la chaîne de caractères
         contenu = await contenu.replaceAll(regex_nettoyage, "");
