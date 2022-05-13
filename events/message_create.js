@@ -16,9 +16,16 @@ module.exports = {
 
         if (mot.length < 4) return; // Si la longueur du mot est plus petite que 4, ça ne peut pas être quoi, on renvoie
 
-        const regex_quoi = /quoi/iy;
-        regex_quoi.lastIndex = mot.length - 4;
+        //* Nettoyage du mot pour pas avoir de doublons de lettres pour bien réussir la détection du quoi
+        let mot_sans_doublons = mot[0];
+        for (i = 1; i < mot.length; i++) {
+            mot_sans_doublons += mot[i] != mot[i - 1] ? mot[i] : "";
+        }
 
-        if (regex_quoi.test(mot)) return await message.channel.send("feur !");
+        const regex_quoi = /quoi/iy;
+        regex_quoi.lastIndex = mot_sans_doublons.length - 4;
+
+        if (regex_quoi.test(mot_sans_doublons))
+            return await message.channel.send("feur !");
     },
 };
