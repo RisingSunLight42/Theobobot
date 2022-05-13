@@ -5,7 +5,7 @@ module.exports = {
         let contenu = message.content;
 
         //* Définit un regex qui permet de match tous les emojis classiques
-        const regex_nettoyage = /[^\w\s]/g; // Remplace tout ce qui n'est pas des nombres, caractères de ponctuations, espaces ou underscore
+        const regex_nettoyage = /[^àùçèé\w\s]/g; // Récupère tout ce qui n'est pas des lettres (les accents sont mis en durs car sinon ils sont capturés) et des espaces
 
         //* Nettoyage de la chaîne de caractères
         contenu = await contenu.replaceAll(regex_nettoyage, "");
@@ -28,6 +28,14 @@ module.exports = {
                 `${await mot_sans_doublons.substr(
                     /(s|t)/gi.test(mot_sans_doublons[2]) ? 3 : 2
                 )}`
+            );
+        }
+
+        //* PARTIE CRI
+        const regex_list_cri = /\b(?:^cri\w+|^cry\w+)\b/gi;
+        if (regex_list_cri.test(mot_sans_doublons)) {
+            await message.channel.send(
+                `${await (await mot_sans_doublons.substr(3)).toUpperCase()}`
             );
         }
 
