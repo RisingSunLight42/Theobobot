@@ -13,9 +13,12 @@ module.exports = {
         //* Conversion en array en retirant tous les éléments vides et enregistre le dernier mot de la chaîne
         contenu = await contenu.split(" ").filter(String);
         const mot = contenu[contenu.length - 1];
+        if (mot.length < 4) return; // Si la longueur du mot est plus petite que 4, ça ne peut pas être quoi et répéter serait inutile, on renvoie
 
-        if (mot.length < 4) return; // Si la longueur du mot est plus petite que 4, ça ne peut pas être quoi, on renvoie
+        //* PARTIE DI
+        const regex_list_di = /\b(?:di|dy)\b/giy;
 
+        //* PARTIE QUOI
         //* Nettoyage du mot pour pas avoir de doublons de lettres pour bien réussir la détection du quoi
         let mot_sans_doublons = mot[0];
         for (i = 1; i < mot.length; i++) {
