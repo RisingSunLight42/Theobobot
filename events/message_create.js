@@ -40,9 +40,7 @@ module.exports = {
         }
 
         //* PARTIE QUOI
-        const regex_quoi = /quoi/iy;
-        regex_quoi.lastIndex = mot_sans_doublons.length - 4;
-
+        const regex_quoi = /quoi$/i;
         if (regex_quoi.test(mot_sans_doublons))
             return await message.channel.send("feur !");
     },
