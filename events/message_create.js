@@ -13,8 +13,7 @@ module.exports = {
         //* Conversion en array en retirant tous les éléments vides et enregistre le dernier mot de la chaîne
         contenu = await contenu.split(" ").filter(String);
         const mot = contenu[contenu.length - 1];
-
-        if (mot.length < 4) return; // Si la longueur du mot est plus petite que 4, ça ne peut pas être quoi, on renvoie
+        if (mot.length < 4) return; // Si la longueur du mot est plus petite que 4, ça ne peut pas être quoi et répéter serait inutile, on renvoie
 
         //* Nettoyage du mot pour pas avoir de doublons de lettres pour bien réussir la détection du quoi
         let mot_sans_doublons = mot[0];
@@ -22,6 +21,17 @@ module.exports = {
             mot_sans_doublons += mot[i] != mot[i - 1] ? mot[i] : "";
         }
 
+        //* PARTIE DI
+        const regex_list_di = /\b(?:^di\w+|^dy\w+)\b/gi;
+        if (regex_list_di.test(mot_sans_doublons)) {
+            await message.channel.send(
+                `${await mot_sans_doublons.substr(
+                    /(s|t)/gi.test(mot_sans_doublons[2]) ? 3 : 2
+                )}`
+            );
+        }
+
+        //* PARTIE QUOI
         const regex_quoi = /quoi/iy;
         regex_quoi.lastIndex = mot_sans_doublons.length - 4;
 
